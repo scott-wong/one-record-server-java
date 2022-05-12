@@ -43,7 +43,7 @@ public class VersioningResource {
 
   @RequestMapping(method = POST, value = "/{companyId}/los/{loId}/mementos", consumes = JsonLd.MEDIA_TYPE)
   @ResponseStatus(HttpStatus.CREATED)
-  @ApiOperation(value = "INTERNAL Creates a snapshot (memento) of the data")
+  @ApiOperation(value = "INTERNAL Creates a snapshot (memento) of the data", response = String.class)
   public ResponseEntity<Void> addMemento(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId, @RequestBody Memento memento) {
     final String loUri = getCurrentUri().replace("/mementos", "");
     final String mementoId = versioningService.addMemento(getCurrentUri(), loUri, memento);
@@ -70,7 +70,7 @@ public class VersioningResource {
   }
 
   @RequestMapping(method = GET, value = "/{companyId}/los/{loId}/timegate", produces = JsonLd.MEDIA_TYPE)
-  @ApiOperation(value = "Retrieves the memento for a logistics object closest to a given date time")
+  @ApiOperation(value = "Retrieves the memento for a logistics object closest to a given date time", response = String.class)
   public ResponseEntity<Void> getTimegate(@PathVariable("companyId") String companyId,
                                           @PathVariable("loId") String loId,
                                           @RequestHeader("Accept-Datetime") String dateTime,

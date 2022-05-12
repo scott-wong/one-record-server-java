@@ -59,7 +59,7 @@ public class LogisticsObjectsResource {
 
   @RequestMapping(method = POST, value = "/{companyId}/los", consumes = JsonLd.MEDIA_TYPE)
   @ResponseStatus(HttpStatus.CREATED)
-  @ApiOperation(value = "Creates a logistics object")
+  @ApiOperation(value = "Creates a logistics object", response = String.class)
   public ResponseEntity<Void> addLogisticsObject(@PathVariable("companyId") String companyId, @RequestBody LogisticsObject logisticsObject) {
     LogisticsObject lo = logisticsObjectsHandler.handleAddLogisticsObject(logisticsObject, getCurrentUri());
     final HttpHeaders headers = new HttpHeaders();
@@ -96,7 +96,7 @@ public class LogisticsObjectsResource {
 
   @RequestMapping(method = PATCH, value = "/{companyId}/los/{loId}", consumes = JsonLd.MEDIA_TYPE)
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  @ApiOperation(value = "Updates a logistics object - NOT WORKING CORRECTLY YET")
+  @ApiOperation(value = "Updates a logistics object - NOT WORKING CORRECTLY YET", response = String.class)
   public ResponseEntity<Void> updateLogisticsObject(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId, @RequestBody PatchRequest patchRequest) {
     logisticsObjectsHandler.handleUpdateLogisticsObject(patchRequest);
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -116,7 +116,7 @@ public class LogisticsObjectsResource {
 
   @RequestMapping(method = POST, value = "/{companyId}/los/{loId}/events", consumes = JsonLd.MEDIA_TYPE)
   @ResponseStatus(HttpStatus.CREATED)
-  @ApiOperation(value = "Creates events for a given logistics object")
+  @ApiOperation(value = "Creates events for a given logistics object", response = String.class)
   public ResponseEntity<Void> addEvents(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId, @RequestBody Event event) {
     final String loUri = getCurrentUri().replace("/events", "");
     logisticsObjectsService.addEvent(event, loUri);
@@ -134,7 +134,7 @@ public class LogisticsObjectsResource {
 
   @RequestMapping(method = POST, value = "/{companyId}/los/{loId}/acl", consumes = JsonLd.MEDIA_TYPE)
   @ResponseStatus(HttpStatus.CREATED)
-  @ApiOperation(value = "INTERNAL Creates Access Control List item for a given logistics object")
+  @ApiOperation(value = "INTERNAL Creates Access Control List item for a given logistics object", response = String.class)
   @ApiIgnore
   public ResponseEntity<Void> addACL(@PathVariable("companyId") String companyId, @PathVariable("loId") String loId, @RequestBody AccessControlList acl) {
     accessControlListService.addAccessControlList(acl);

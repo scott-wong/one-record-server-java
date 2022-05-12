@@ -35,7 +35,7 @@ public class NotificationResource {
   }
 
   @RequestMapping(method = POST, value = "/{companyId}/callback", consumes = JsonLd.MEDIA_TYPE)
-  @ApiOperation(value = "Callback URL for receiving notifications from publishers")
+  @ApiOperation(value = "Callback URL for receiving notifications from publishers", response = String.class)
   public ResponseEntity<Void> callbackUrl(@PathVariable("companyId") String companyId,
                                           @RequestBody Notification notification,
                                           @RequestParam(value = "topic", required = false) TopicEnum topic) {

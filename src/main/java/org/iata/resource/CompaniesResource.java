@@ -18,13 +18,10 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.inject.Inject;
-import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.List;
 import java.util.Locale;
 
-import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -44,7 +41,7 @@ public class CompaniesResource {
   }
   @RequestMapping(method = POST, value = "/companies", consumes = JsonLd.MEDIA_TYPE)
   @ResponseStatus(HttpStatus.CREATED)
-  @ApiOperation(value = "INTERNAL Creates a company")
+  @ApiOperation(value = "INTERNAL Creates a company", response = String.class)
   public ResponseEntity<Void> addCompany(@RequestBody CompanyInformation companyInformation) {
     final String companyId = companyInformation.getCompanyId();
     final String companyIdentifierForIoL = RestUtils.createCompanyIdentifierFromCurrentUri("/{companyId}", companyId);
@@ -76,7 +73,7 @@ public class CompaniesResource {
 
   @RequestMapping(method = DELETE, value = "/companies/{companyId}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  @ApiOperation(value = "INTERNAL Deletes a company for a given companyId")
+  @ApiOperation(value = "INTERNAL Deletes a company for a given companyId", response = String.class)
   @ApiIgnore
   public ResponseEntity<Void> deleteCompany(@PathVariable("companyId") String companyId) {
     final String id = RestUtils.getCurrentUri();
