@@ -45,10 +45,9 @@ public class Event
      */
     @OWLObjectProperty(iri = Vocabulary.s_p_linkedObject)
     @ParticipationConstraints({
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_Thing, max = 1),
-        @ParticipationConstraint(owlObjectIRI = Vocabulary.s_c_LogisticsObject, min = 1, max = -1)
+        @ParticipationConstraint(owlObjectIRI = "http://www.w3.org/2001/XMLSchema#string", max = 1)
     })
-    protected LogisticsObject linkedObject;
+    protected String linkedObject;
     /**
      * Location of event
      * 
@@ -156,11 +155,11 @@ public class Event
         return ((((("Event {"+ name)+"<")+ id)+">")+"}");
     }
 
-    public void setLinkedObject(LogisticsObject linkedObject) {
+    public void setLinkedObject(String linkedObject) {
         this.linkedObject = linkedObject;
     }
 
-    public LogisticsObject getLinkedObject() {
+    public String getLinkedObject() {
         return linkedObject;
     }
 
