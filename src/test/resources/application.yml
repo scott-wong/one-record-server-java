@@ -1,0 +1,12 @@
+spring:
+  application.name: onerecord
+  data.mongodb.uri: mongodb://root:Eu.12345@s1.iarch.tech:27018/admin?retryWrites=true&w=majority
+
+endpoint.one-record-server-service:
+
+subscription:
+  secret: udgcjxgyurefxmnkfuireytukjfegijgkh
+  subscribeToStatusUpdates: true
+  sendLogisticsObjectBody: false
+  cacheFor: 86400
+  contentType: application/ld+json
