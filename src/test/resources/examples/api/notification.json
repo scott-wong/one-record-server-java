@@ -1,13 +1,18 @@
 {
   "@type": [
-    "https://onerecord.iata.org/api/Notification"
+    "api:Notification"
   ],
-  "https://onerecord.iata.org/api/Notification#eventType": "OBJECT_CREATED",
-  "https://onerecord.iata.org/api/Notification#logisticsObject": {
-    "@type": [
-      "https://onerecord.iata.org/cargo/LogisticsObject"
-    ],
-    "https://onerecord.iata.org/cargo/LogisticsObject#companyIdentifier": "http://localhost:8080/companies/iata"
+  "@context": {
+    "cargo": "https://onerecord.iata.org/",
+    "api": "https://onerecord.iata.org/api/"
   },
-  "https://onerecord.iata.org/api/Notification#topic": "https://onerecord.iata.org/cargo/Piece"
+  "api:Notification#eventType": "OBJECT_CREATED",
+  "api:Notification#logisticsObject": {
+    "@type": [
+      "cargo:LogisticsObject"
+    ],
+    "@id": "http://127.0.0.1:8080/companies/iata/los/Piece_017876",
+    "cargo:LogisticsObject#companyIdentifier": "http://127.0.0.1:8080/companies/iata"
+  },
+  "api:Notification#topic": "cargo:Piece"
 }
