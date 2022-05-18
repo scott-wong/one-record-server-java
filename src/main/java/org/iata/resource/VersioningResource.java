@@ -16,9 +16,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.OffsetDateTime;
 import java.util.Locale;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -74,9 +72,9 @@ public class VersioningResource {
   public ResponseEntity<Void> getTimegate(@PathVariable("companyId") String companyId,
                                           @PathVariable("loId") String loId,
                                           @RequestHeader("Accept-Datetime") String dateTime,
-                                          @RequestParam(value = "locale", required = false) Locale locale) throws ParseException {
+                                          @RequestParam(value = "locale", required = false) Locale locale) {
     final String loUri = getCurrentUri().replace("/timegate", "");
-    Date date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(dateTime);
+    OffsetDateTime date = OffsetDateTime.parse(dateTime);
     Memento memento = versioningService.findMementoByDate(loUri, date);
 
     // Return Link header containing the memento and the Memento-Datetime header containing the modification date

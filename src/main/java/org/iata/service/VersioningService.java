@@ -3,6 +3,7 @@ package org.iata.service;
 import org.iata.api.model.Memento;
 import org.iata.api.model.Timemap;
 
+import java.time.OffsetDateTime;
 import java.util.Date;
 
 public interface VersioningService {
@@ -15,6 +16,6 @@ public interface VersioningService {
 
   Timemap getTimemap(String timemapUri);
 
-  Memento findMementoByDate(String loUri, Date dateTime);
+  Memento findMementoByDate(String loUri, OffsetDateTime dateTime);
 
 }

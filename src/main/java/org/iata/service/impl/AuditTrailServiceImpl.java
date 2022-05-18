@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
@@ -46,7 +47,7 @@ public class AuditTrailServiceImpl implements AuditTrailsService {
         .stream().findFirst().orElseThrow(LogisticsObjectNotFoundException::new);
     Set<ChangeRequest> changeRequests = Optional.ofNullable(auditTrail.getChangeRequests()).orElse(new HashSet<>());
     ChangeRequest changeRequest = new ChangeRequest();
-    changeRequest.setTimestamp(new Date());
+    changeRequest.setTimestamp(OffsetDateTime.now());
     changeRequest.setCompanyId(patchRequest.getRequestorCompanyIdentifier());
     changeRequest.setPatchRequest(patchRequest);
     changeRequests.add(changeRequest);

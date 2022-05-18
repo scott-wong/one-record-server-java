@@ -1,15 +1,22 @@
 {
   "@type": [
-    "https://onerecord.iata.org/api/Subscription"
+    "api:Subscription"
   ],
-  "https://onerecord.iata.org/api/Subscription#cacheFor": "86400",
-  "https://onerecord.iata.org/api/Subscription#callbackUrl": "http://localhost:8080/companies/iata/callback?topic=Piece",
-  "https://onerecord.iata.org/api/Subscription#contentTypes": [
+  "@context": {
+    "cargo": "https://onerecord.iata.org/",
+    "api": "https://onerecord.iata.org/api/",
+    "publisher": "http://127.0.0.1:8080/companies/iata",
+    "subscriber": "http://127.0.0.1:8080/companies/eunited"
+  },
+  "api:Subscription#cacheFor": "86400",
+  "api:Subscription#callbackUrl": "http://localhost:8080/companies/iata/callback?topic=Piece",
+  "api:Subscription#contentTypes": [
     "application/ld+json"
   ],
-  "https://onerecord.iata.org/api/Subscription#myCompanyIdentifier": "http://localhost:8080/companies/iata",
-  "https://onerecord.iata.org/api/Subscription#secret": "iuegskvndvsdnvuknefkm",
-  "https://onerecord.iata.org/api/Subscription#sendLogisticsObjectBody": false,
-  "https://onerecord.iata.org/api/Subscription#subscribeToStatusUpdates": true,
-  "https://onerecord.iata.org/api/Subscription#topic": "https://onerecord.iata.org/api/Piece"
+  "api:Subscription#myCompanyIdentifier": "subscriber",
+  "api:Subscription#secret": "iuegskvndvsdnvuknefkm",
+  "api:Subscription#sendLogisticsObjectBody": false,
+  "api:Subscription#subscribeToStatusUpdates": true,
+  "api:Subscription#subscribedTo": "publisher",
+  "api:Subscription#topic": "cargo:Piece"
 }
