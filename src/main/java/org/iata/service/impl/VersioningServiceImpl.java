@@ -12,6 +12,7 @@ import org.iata.util.Utils;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.time.OffsetDateTime;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
@@ -35,9 +36,8 @@ public class VersioningServiceImpl implements VersioningService {
 
   @Override
   public String addMemento(String currentUri, String loUri, Memento memento) {
-    final Date date = new Date();
     memento.setOriginal(loUri);
-    memento.setCreated(date);
+    memento.setCreated(OffsetDateTime.now());
     final String mementoId = currentUri + "/" + Utils.generateUuid();
     memento.setId(mementoId);
     mementoRepository.save(memento);
@@ -50,6 +50,9 @@ public class VersioningServiceImpl implements VersioningService {
 
   private void addLastMementoToTimemap(String loUri, Memento memento, String mementoId) {
     Timemap timemap = timemapRepository.findById(loUri + "/timemap").orElse(new Timemap());
+    if(timemap.getId() == null){
+      timemap.setId(loUri + "/timemap");
+    }
     Mementos mementos = Optional.ofNullable(timemap.getMementos()).orElse(new Mementos());
     mementos.setLastMemento(mementoId);
 
@@ -92,20 +95,20 @@ public class VersioningServiceImpl implements VersioningService {
   }
 
   @Override
-  public Memento findMementoByDate(String currentUri, Date dateTime) {
+  public Memento findMementoByDate(String currentUri, OffsetDateTime dateTime) {
     List<Memento>  mementosForLo = mementoRepository.findByOriginal(currentUri);
     if (mementosForLo.size() == 0) {
       return null;
     }
 
-    final List<Date> dates = mementosForLo.stream().map(Memento::getCreated).collect(Collectors.toList());
-    final Date dateNearest = getDateNearest(dates, dateTime);
+    final List<OffsetDateTime> dates = mementosForLo.stream().map(Memento::getCreated).collect(Collectors.toList());
+    final OffsetDateTime dateNearest = getDateNearest(dates, dateTime);
 
     return mementosForLo.stream().filter(memento -> memento.getCreated().equals(dateNearest)).findFirst().orElse(null);
   }
 
-  private Date getDateNearest(List<Date> dates, Date targetDate) {
-    NavigableSet<Date> dateToCompare = new TreeSet<>(dates);
+  private OffsetDateTime getDateNearest(List<OffsetDateTime> dates, OffsetDateTime targetDate) {
+    NavigableSet<OffsetDateTime> dateToCompare = new TreeSet<>(dates);
 
     return Optional.ofNullable(dateToCompare.higher(targetDate))
         .orElseGet(() -> Optional.ofNullable(dateToCompare.lower(targetDate)).orElse(null));
