@@ -29,7 +29,7 @@ As the latest models are already generated and committed in this repository acco
 `   java -jar -Djdk.tls.client.protocols=TLSv1.2 one-record-server-java-1.0-SNAPSHOT.jar`
    
 ## Swagger API Documentation
-Swagger API Documentation can be accessed and tested via [https://yourserverurl/swagger-ui.html](https://yourserverurl/swagger-ui.html). If you run the server locally, Swagger documentation can be accessed via [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html).
+Swagger API Documentation can be accessed and tested via [https://yourserverurl/swagger-ui/](https://yourserverurl/swagger-ui/). If you run the server locally, Swagger documentation can be accessed via [http://localhost:8080/swagger-ui/](http://localhost:8080/swagger-ui/).
 
 ## Postman collection
 A Postman collection containing ONE Record API endpoints ready for testing can be found [here](https://github.com/IATA-Cargo/one-record-server-java/tree/master/src/test/resources/postman).
